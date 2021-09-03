@@ -1,42 +1,83 @@
-var userInput;
-var userScore = 0;
-var compInput;
-var compScore = 0;
+let userScore = 0;
+let compScore = 0;
 
-var compArray = ['Rock', 'Paper', 'Scissors'];
+const userScore_span = document.getElementById("user_score")
+const compScore_span = document.getElementById("comp_score")
 
-const random = () => {
-    compInput = Math.floor(Math.random() * compArray.length);
-    console.log(compInput);
+const scoreBoard = document.querySelector(".scoreboard")
+
+const result_div = document.querySelector(".result")
+
+const rock = document.getElementById("rock")
+const paper = document.getElementById("paper")
+const scissors = document.getElementById("scissors")
+
+function getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"]
+    const randomNumber = (Math.floor(Math.random() * 3));
+    return choices[randomNumber]
 }
 
-const rock = () => {
-    userInput = 0;
-    console.log(userInput);
+function convert(inp){
+if (inp === "rock") return "Rock"
+if (inp === "paper") return "Paper"
+if (inp === "scissors") return "Scissors"
 }
 
-const paper = () => {
-    userInput = 1;
-    console.log(userInput);
+function win(user, comp) {
+    userScore++
+    userScore_span.innerHTML = userScore
+    console.log(user)
+    console.log(comp)
+    result_div.innerHTML = `${convert(user)} beats ${convert(comp)}! You win`
 }
 
-const scissors = () => {
-    userInput = 2;
-    console.log(userInput);
+function lose(user, comp) {
+    compScore++
+    compScore_span.innerHTML =  compScore
+    console.log(user)
+    console.log(comp)
+    result_div.innerHTML = convert(comp) + " beats " + convert(user) + "! You lose"
 }
 
-if (userInput == 0 && compInput == 1 || userInput == 1 && compInput == 2 || userInput == 2 && compInput == 0) {
-    compScore = compScore + 1;
-    console.log(compScore);
+function draw(user, comp) {
+    console.log(user)
+    console.log(comp)
+    result_div.innerHTML = convert(user) + " draws with " + convert(comp)
 }
 
-if (
-    userInput == 1 && compInput == 0 ||
-    userInput == 2 && compInput == 1 ||
-    userInput == 0 && compInput == 2) {
-    userScore = userScore + 1;
-    console.log('Userscore is', userScore);
+function game(userChoice) {
+    const computerChoice = getComputerChoice();
+    switch (userChoice + computerChoice) {
+        case "rockpaper":
+        case "paperscissors":
+        case "scissorsrock":
+            lose(userChoice, computerChoice)
+            break
+        case "paperrock":
+        case "rockscissors":
+        case "scissorspaper":
+            win(userChoice, computerChoice)
+            break
+        case "rockrock":
+        case "paperpaper":
+        case "scissorsscissors":
+            draw(userChoice, computerChoice)
+    }
 }
 
-document.getElementById("userScore").innerHTML = userScore;
-document.getElementById("compScore").innerHTML = compScore;
+function main() {
+    rock.addEventListener('click', function () {
+        game("rock");
+    })
+
+    paper.addEventListener('click', function () {
+        game("paper");
+    })
+
+    scissors.addEventListener('click', function () {
+        game("scissors");
+    })
+}
+
+main();

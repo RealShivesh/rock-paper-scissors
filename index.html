@@ -5,22 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
     <title>Rock Paper Scissors</title>
 </head>
 
 <body>
     <header>Choose your weapons wisely</header>
-    <div class="player">
-        <button onclick="rock()">Rock</button>
-        <button onclick="paper()">Paper</button>
-        <button onclick="scissors()">Scissors</button>
+    <div class="scoreboard">
+        <div class="name" id="user_name">Your Name</div>
+        <div class="name" id="comp_name">Comp</div>
+        <div class="score" id="user_score">0</div>:
+        <div class="score" id="comp_score">0</div>
     </div>
-    Your Score = <span id="userScore"></span>
-    And here come the computer's weapon
-    Computer Score = <span id="compScore"></span>
-    <div><button onclick="random()">Computer output</button></div>
-
-    And the winner is: 
+    <div class="result">Rock smashes scissors. You win!</div>
+    <div class="weapons">
+        <button id="rock" class="weapon">Rock</button>
+        <button id="paper" class="weapon">paper</button>
+        <button id="scissors" class="weapon">Scissors</button>
+    </div>
+    
 </body>
 
 <script src="./script.js"></script>
